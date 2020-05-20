@@ -1,17 +1,17 @@
 "use strict";
 const expect = require("chai").expect;
 const express = require("express");
-const es6Renderer = require("../es6-renderer");
+const jessica = require("../jessica");
 
 describe("ES6 Renderer", () => {
 
   it("is a function", () => {
-    expect(es6Renderer).to.be.a("function");
+    expect(jessica).to.be.a("function");
   });
 
   it("interpolates a provided string", () => {
     const titleTpl = "${engineName} - The fastest javascript template string engine!";
-    const content = es6Renderer(titleTpl, {
+    const content = jessica(titleTpl, {
       template: true,
       locals: { engineName: "ES6 Renderer" }
     });
@@ -20,7 +20,7 @@ describe("ES6 Renderer", () => {
 
   it("throws an error in case of interpolation failure", () => {
     const titleTpl = "${engineName} - The fastest javascript template string engine!";
-    const err = es6Renderer(titleTpl, {
+    const err = jessica(titleTpl, {
       template: true,
       locals: {}
     });
@@ -29,7 +29,7 @@ describe("ES6 Renderer", () => {
 
   describe("External templates", () => {
     it("renders a template file with a callback", done => {
-      es6Renderer(
+      jessica(
         __dirname + "/index.html",
         { locals: { engineName: "ES6 Renderer", footer: "MIT License" } },
         (err, content) => {
@@ -41,7 +41,7 @@ describe("ES6 Renderer", () => {
     });
 
     it("throws an error in case of template interpolation failure with a callback", done => {
-      es6Renderer(
+      jessica(
         __dirname + "/index.html",
         { locals: { footer: "MIT License" } },
         (err) => {
@@ -56,7 +56,7 @@ describe("ES6 Renderer", () => {
         expect(content).to.equal("ES6 Renderer - The fastest javascript template string engine!\nMIT License");
         done();
       };
-      const willRender = es6Renderer(
+      const willRender = jessica(
         __dirname + "/index.html",
         { locals: { engineName: "ES6 Renderer", footer: "MIT License" } }
       );
@@ -68,7 +68,7 @@ describe("ES6 Renderer", () => {
         expect(content).to.equal("ES6 Renderer - The fastest javascript template string engine!\nMIT License");
         done();
       };
-      es6Renderer(
+      jessica(
         __dirname + "/index.html",
         { locals: { engineName: "ES6 Renderer", footer: "MIT License" } },
         (err, content) => {
@@ -83,7 +83,7 @@ describe("ES6 Renderer", () => {
         expect(err instanceof Error).to.equal(true);
         done();
       };
-      const willRender = es6Renderer(
+      const willRender = jessica(
         __dirname + "/index.html",
         { locals: {} }
       );
@@ -92,7 +92,7 @@ describe("ES6 Renderer", () => {
 
     it("throws an error in case of template interpolation with both promise and callback", done => {
       const assert = err => expect(err instanceof Error).to.equal(true);
-      es6Renderer(
+      jessica(
         __dirname + "/index.html",
         { locals: { engineName: "ES6 Renderer", footer: "MIT License" } },
         (err) => {
@@ -112,7 +112,7 @@ describe("ES6 Renderer", () => {
         expect(content).to.equal("ES6 Renderer - The fastest javascript template string engine!MIT License");
       };
       const template = "${engineName} - The fastest javascript template string engine!${footer}";
-      const willRender = es6Renderer(
+      const willRender = jessica(
         template,
         {
           template: true,
@@ -125,7 +125,7 @@ describe("ES6 Renderer", () => {
     });
 
     it("render partials", done => {
-      es6Renderer(
+      jessica(
         __dirname + "/index.html",
         {
           locals: { engineName: "ES6 Renderer" },
@@ -146,7 +146,7 @@ describe("ES6 Renderer", () => {
         expect(err instanceof Error).to.equal(true);
         done();
       };
-      es6Renderer(
+      jessica(
         __dirname + "/inde.html",
         {
           locals: { engineName: "ES6 Renderer" },
@@ -163,7 +163,7 @@ describe("ES6 Renderer", () => {
         expect(err instanceof Error).to.equal(true);
         done();
       };
-      es6Renderer(
+      jessica(
         __dirname + "/index.html",
         {
           locals: { engineName: "ES6 Renderer" },
@@ -180,7 +180,7 @@ describe("ES6 Renderer", () => {
   describe("Precompilation", () => {
     it("can pre-compile templates when all names are listed", () => {
       const text = '${engineName} - The fastest javascript template string engine in the whole ${place}!';
-      const precompiled = es6Renderer(text, 'engineName, place');
+      const precompiled = jessica(text, 'engineName, place');
       const content = precompiled('ES6 Renderer', 'multiverse')
       expect(precompiled).to.be.a("function");
       expect(content).to.equal("ES6 Renderer - The fastest javascript template string engine in the whole multiverse!");
@@ -188,7 +188,7 @@ describe("ES6 Renderer", () => {
   
     it("can precompile templates using default '$' object property", () => {
       const text = '${$.engineName} - The fastest javascript template string engine in the whole ${$.place}!';
-      const precompiled = es6Renderer(text)
+      const precompiled = jessica(text)
       const content = precompiled({ engineName: 'ES6 Renderer', place: 'multiverse' });
       expect(precompiled).to.be.a("function");
       expect(content).to.equal("ES6 Renderer - The fastest javascript template string engine in the whole multiverse!");
@@ -196,7 +196,7 @@ describe("ES6 Renderer", () => {
 
     it("throws an error on template precompilation failure", () => {
       const text = '${engineName} - The fastest javascript template string engine in the whole ${place}!';
-      const precompiled = es6Renderer(text, 'engineName');
+      const precompiled = jessica(text, 'engineName');
       const err = precompiled('ES6 Renderer', 'multiverse')
       expect(precompiled).to.be.a("function");
       expect(err instanceof Error).to.equal(true);
@@ -206,7 +206,7 @@ describe("ES6 Renderer", () => {
   describe("Express", () => {
     const app = express();
     
-    app.engine('html', es6Renderer);
+    app.engine('html', jessica);
     app.set('views', __dirname);
     app.set('view engine', 'html');
 

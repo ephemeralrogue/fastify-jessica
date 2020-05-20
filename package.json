@@ -1,8 +1,8 @@
 {
   "name": "express-es6-template-engine",
   "version": "2.2.2",
-  "description": "Express ES6 string template engine",
-  "main": "es6-renderer.js",
+  "description": "Express template engine, modified from Dian Dimitrov's Express ES6 string template engine",
+  "main": "jessica.js",
   "scripts": {
     "test": "mocha"
   },
@@ -11,7 +11,7 @@
     "express",
     "template engine",
     "javascript",
-    "backlash template strings"
+    "backtick template strings"
   ],
   "homepage": "https://dondido.github.io/express-es6-template-engine/",
   "engine": "node >= 4.0.1",
@@ -19,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/dondido/express-es6-template-engine.git"
   },
-  "author": "Dian Dimitrov",
+  "author": "Joshua Alexander",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
