@@ -2,7 +2,7 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<meta name="description" content="Express ES6 Template engine - from strings to backtick syntax and template literals">
+	<meta name="description" content="JESSica: The JS ES6 Template Engine">
 	<style>
 		@import url(https://fonts.googleapis.com/css?family=Raleway:500);
 		@import url(https://fonts.googleapis.com/css?family=Oswald);
@@ -250,19 +250,19 @@
 			transform: rotate3d(0,1,0,-180deg);
 		}
 	</style>
-	<title>Express ES6 temlpate engine - the fastest and unopinionated javascript template engine for Node and Express</title>
+	<title> JESSica: The JS ES6 Template Engine for Express</title>
 </head>
 <body>
 <a href="https://github.com/dondido/express-es6-template-engine" class="sash">Fork me on GitHub</a>
 
 <div class="snip1296">
   <h6>Est. 2015</h6>
-  <h1>ES6RENDERER</h1>
+  <h1>JESSica</h1>
   <h5>Express Template Engine</h5>
 </div>
 
 <h2>Origins</h2>
-<p>The art of creating code that is "environment agnostic" recognised as "Isomorphic JavaScript", allows us to render the views of the application from the server (during the initialisation of the app) and then keep rendering the other views directly in the browser (avoiding a full page refresh) while the user keep navigating across the different sections. One of the advantages of having ES6 renderer as template engine for the backend of a web application is that one have to deal only with javascript template literals as a single syntax across the web stack. With this in mind the engine can be seen as the perfect tool that facilitates logic sharing between the frontend and the backend in order to reduce the codebase duplication between the browser and the server to the bare minimun. Express ES6 temlpate engine is a minimal and flexible Node web application library, providing a robust set of features for building single and multi page, and hybrid web applications. As a framework-independent technology, ES6 Renderer is an engine one can adopt and hit the ground running with immediately.
+<p>The art of creating code that is "environment agnostic" recognised as "Isomorphic JavaScript", allows us to render the views of the application from the server (during the initialisation of the app) and then keep rendering the other views directly in the browser (avoiding a full page refresh) while the user keep navigating across the different sections. One of the advantages of having jessica as template engine for the backend of a web application is that one have to deal only with javascript template literals as a single syntax across the web stack. With this in mind the engine can be seen as the perfect tool that facilitates logic sharing between the frontend and the backend in order to reduce the codebase duplication between the browser and the server to the bare minimun. Express ES6 temlpate engine is a minimal and flexible Node web application library, providing a robust set of features for building single and multi page, and hybrid web applications. As a framework-independent technology, jessica is an engine one can adopt and hit the ground running with immediately.
 </p>
 
 <h2>Features</h2>
@@ -336,7 +336,7 @@
 </div>
 <p>
 	<h2>Online compiler</h2> 
-	<p>Every developer has been in a situation where they simply want to try and evaluate a framework or library, without having to install it or include it in a project. The online compiler provides a custom environment to test and fiddle with Express ES6 template engine functionality right inside a browser and see the results as they type in real time. A quick tour of the engine logic implementation will give you a better understanding of what it provides and why you should use it. </p><p> The general rendering process of the engine is rather simple. <code>es6Renderer('template', {locals})</code> compiles the provided source code into a javaScript function. Calling that resultant function with an object as an argument returns a string of HTML rendered with our data. This methods combine compiling and rendering into one step. The <code>'template'</code> string used as a first argument is a reference to a <code>'template.html'</code> file in a view directory with a content presented in the first text area below (see Template). The data object called <code>'locals'</code> provided in the second text area (see Data) has properties that are local variables within the content.</p> 
+	<p>Every developer has been in a situation where they simply want to try and evaluate a framework or library, without having to install it or include it in a project. The online compiler provides a custom environment to test and fiddle with Express ES6 template engine functionality right inside a browser and see the results as they type in real time. A quick tour of the engine logic implementation will give you a better understanding of what it provides and why you should use it. </p><p> The general rendering process of the engine is rather simple. <code>jessica('template', {locals})</code> compiles the provided source code into a javaScript function. Calling that resultant function with an object as an argument returns a string of HTML rendered with our data. This methods combine compiling and rendering into one step. The <code>'template'</code> string used as a first argument is a reference to a <code>'template.html'</code> file in a view directory with a content presented in the first text area below (see Template). The data object called <code>'locals'</code> provided in the second text area (see Data) has properties that are local variables within the content.</p> 
 	<h4>Template</h4>
 	<textarea autocomplete="off" class="template-input"><div class="simple-1" style="background-color: blue; border: 1px solid black"><div class="colors"><span>Hello ${name}! <strong>You have ${messageCount} messages!</strong></span><ul>${colors ? colors.reduce((m, color) => m + '<li>' + color + '</li>', '') : '<li>No colors!</li>'}</ul></div><button class="${primary ? 'primary' : 'secondary'}">${buttonLabel}</button></div></textarea>
 	<h4>Data</h4>
@@ -355,13 +355,13 @@
 
 <h2>Benchmarks</h2>
 <p>It’s not uncommon that from time to time I am asked about what template engine do I use and why. After my reply, I get something like: “isn’t that one slow?”. Usually, when developers talk in regards to performance, I always utter something like: “well, that depends on …”, and there one can insert his slow performance reasoning of choice, if it can be bad or not that bad.</p>
-<p>Benchmark testing was done with Marko's brilliant <a href="https://github.com/marko-js/templating-benchmarks">Templating benchmark suite</a>. Testing ES6 Renderer performance was a great opportunity to see how it stacked-up beside others. Our speed test compiled one main template containing an array of string, an object literal and conditional statements.</p>
+<p>Benchmark testing was done with Marko's brilliant <a href="https://github.com/marko-js/templating-benchmarks">Templating benchmark suite</a>. Testing jessica performance was a great opportunity to see how it stacked-up beside others. Our speed test compiled one main template containing an array of string, an object literal and conditional statements.</p>
 <table class="benchmarks">
 	<thead>
 		<tr><td colspan="3" class="benchmark-title">RUNTIME PERFORMANCE</td></tr>
 	</thead>
 	<tbody>
-		<tr><td class="engine-name">✓ es6Renderer</td><td class="ops">300,987 op/s</td><td class="ranking">(fastest)</td></tr>
+		<tr><td class="engine-name">✓ jessica</td><td class="ops">300,987 op/s</td><td class="ranking">(fastest)</td></tr>
 		<tr><td class="engine-name">✗ pug</td><td class="ops">155,015 op/s</td><td class="ranking">(48.50% slower)</td></tr>
 		<tr><td class="engine-name">✗ marko</td><td class="ops">143,375 op/s</td><td class="ranking">(52.37% slower)</td></tr>
 		<tr><td class="engine-name">✗ dot</td><td class="ops">129,364 op/s</td><td class="ranking">(57.02% slower)</td></tr>
@@ -374,7 +374,7 @@
 		<tr><td class="engine-name">✗ react</td><td class="ops">2,218 op/s</td><td class="ranking">(99.26% slower)</td></tr>
 	</tbody>
 </table>
-<p>As we see from the chart above ES6 Renderer is the fastest of the all engines compared. It was almost twice as fast as the second place runner on the list. The data presented above is not intended to trash about any of the view engines. The procedure to make the comparison on performance is quite simple and not scientific at all. From a technical point of view it's up to the developer to choose the templating engine that makes him more productive. It is also important to bear in mind that for frontend designers accustomed to code in HTML only, the learning curve for them will be of relevance.</p>
+<p>As we see from the chart above jessica is the fastest of the all engines compared. It was almost twice as fast as the second place runner on the list. The data presented above is not intended to trash about any of the view engines. The procedure to make the comparison on performance is quite simple and not scientific at all. From a technical point of view it's up to the developer to choose the templating engine that makes him more productive. It is also important to bear in mind that for frontend designers accustomed to code in HTML only, the learning curve for them will be of relevance.</p>
 
 <h2>Source</h2>
 <a href="https://github.com/dondido/express-es6-template-engine">github.com/dondido/express-es6-template-engine</a>
