@@ -4,7 +4,7 @@
   "description": "Express template engine, modified from Dian Dimitrov's Express ES6 string template engine",
   "main": "jessica.js",
   "scripts": {
-    "test": "mocha"
+    "test": "test/jessica.spec.js"
   },
   "keywords": [
     "ES6",
