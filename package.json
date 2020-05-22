@@ -1,10 +1,11 @@
 {
-  "name": "express-es6-template-engine",
+  "name": "jessica",
   "version": "2.2.2",
   "description": "Express template engine, modified from Dian Dimitrov's Express ES6 string template engine",
   "main": "jessica.js",
   "scripts": {
-    "test": "test/jessica.spec.js"
+    "test": "test/jessica.spec.js",
+    "mod": "jessica.js"
   },
   "keywords": [
     "ES6",
@@ -13,11 +14,11 @@
     "javascript",
     "backtick template strings"
   ],
-  "homepage": "https://dondido.github.io/express-es6-template-engine/",
+  "homepage": "https://nonsensetwice.github.io/jessica/",
   "engine": "node >= 4.0.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dondido/express-es6-template-engine.git"
+    "url": "git+https://github.com/nonsensetwice/jessica.git"
   },
   "author": "Joshua Alexander",
   "license": "MIT",

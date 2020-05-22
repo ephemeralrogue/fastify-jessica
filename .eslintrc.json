@@ -2,9 +2,9 @@
     "env": {
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
-    "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -13,5 +13,35 @@
         "ecmaVersion": 11
     },
     "rules": {
+        "no-func-assign": "warn",
+        "no-invalid-regexp": "error",
+        "no-regex-spaces": "error",
+        "curly": "error",
+        "default-case-last": "error",
+        "dot-notation": "error",
+        "no-empty-pattern": "error",
+        "no-implied-eval": "error",
+        "no-multi-spaces": "warn",
+        "no-redeclare": "error",
+        "no-self-assign": "error",
+        "no-unused-expressions": "error",
+        "no-useless-escape": "error",
+        "no-useless-return": "error",
+        "require-await": "warn",
+        "wrap-iife": "error",
+        "no-shadow": "error",
+        "no-undefined": "error",
+        "no-unused-vars": "error",
+        "block-spacing": ["error", "always"],
+        "brace-style": "error",
+        "indent": "off",
+        "key-spacing": "error",
+        "new-cap": "error",
+        "semi": ["error", "always"],
+        "arrow-body-style": "error",
+        "arrow-parens": "error",
+        "arrow-spacing": "error",
+        "no-var": "error",
+        "prefer-template": "error"
     }
 }
