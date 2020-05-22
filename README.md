@@ -1,8 +1,7 @@
-JESSica: The JS ES6 Template Engine
+Jessica: The JS ES6 Template Engine
 ======
 
-Jessica is a simple, super fast, and extendable Template Engine for Node and Express applications which uses pure ES6 JavaScript syntax.
-It works by scanning files in a working directory, then reading the contents of the files and converting them from plain strings to ES6 template literals. Template literals, enclosed by back ticks, feature String Interpolation, Embedded Expressions, Multiline strings and String Tagging for safe HTML escaping, localisation, and more. Once conversion is complete, it is then compiled to plain text by the V8 engine. Being less than 1kb, Jessica offloads a lot of the processing directly to the V8 interpreter, which compiles the code and runs as fast as the rest of the Express App. In fact, Jessica will add very little, if any, overhead to your project at all! It should also allow you to implement any functionality you'd like within the bounds of JavaScript.
+"Jessica," drawn from JESS as an anagram of "JS ES6," is a simple, super fast, and extendable Template Engine for Node and Express applications using pure ES6 JavaScript syntax. It works by scanning files in a working directory, then reading the contents of the files and converting them from plain strings to ES6 template literals. Template literals, enclosed by back ticks, feature String Interpolation, Embedded Expressions, Multiline strings and String Tagging for safe HTML escaping, localisation, and more. Once conversion is complete, it is then compiled to plain text by the V8 engine. Being less than 1kb, Jessica offloads a lot of the processing directly to the V8 interpreter, which compiles the code and runs as fast as the rest of the Express App. In fact, Jessica will add very little, if any, overhead to your project at all! It should also allow you to implement any functionality you'd like within the bounds of JavaScript.
 
 Minimum requirements Node.js `v4.0.0`.
 
