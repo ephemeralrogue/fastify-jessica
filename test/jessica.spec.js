@@ -1,6 +1,5 @@
 "use strict";
 const express = require("express");
-const jest = require("jest");
 const jessica = require("../jessica");
 
 describe("jessica", () => {
