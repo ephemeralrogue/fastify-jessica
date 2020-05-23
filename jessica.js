@@ -75,8 +75,8 @@ module.exports = (path, options, render) => {
       let valTempList = localsValues.concat(values);
       try {
         localsValues.push(...values.map((i) => {
-          compile(i, localsKeys)(...valTempList)));
-        }
+          compile(i, localsKeys)(...valTempList);
+        }));
       } catch (err) {
         return render(err);
       }
