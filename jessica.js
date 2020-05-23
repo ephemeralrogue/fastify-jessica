@@ -1,12 +1,15 @@
-const fs = require('fs'); // this engine requires the fs module
+const fs = require('fs');
 
-/* jshint ignore:start */
-const compile = (content, $ = '$') => Function($, 'return `' + content + '`;');
-const precompile = (content, $ = '$') =>
+// jshint ignore:start
+let compile = (content, $ = '$') => Function($, 'return `' + content + '`;');
+let precompile = (content, $ = '$') =>
   Function($, 'try { return `' + content + '`;} catch(err) { return err }');
-/* jshint ignore:end */
+// jshint ignore:end
 
-let setPath = (views, ref, ext) => ref.endsWith(ext) ? ref : views  + '/' + ref + ext;
+let setPath = (views, ref, ext) => {
+  ref.endsWith(ext) ? ref : views  + '/' + ref + ext;
+}
+
 let getPartial = (path, cb = 'resolveNeutral') => {
   let findFile = function(resolve, reject) {
     this.resolveNeutral = (err, content) => err ? reject(err) : resolve(content);
@@ -17,22 +20,21 @@ let getPartial = (path, cb = 'resolveNeutral') => {
 };
     
 module.exports = (path, options, render) => {
-  if(options === undefined || typeof options === 'string') {
+  if (options === undefined || typeof options === 'string') {
     return precompile(path, options);
   }
-  
   let willResolve;
   let willReject;
   
   let fulfillPromise = (resolve, reject) => { 
     willResolve = resolve;
     willReject = reject;
-  }
+  };
   
   let handleRejection = (err) => {
     let output = render(err);
     return willReject ? willReject(err) : output;
-  }
+  };
   
   let {locals = {}, partials = {}, settings, template} = options; 
   
@@ -53,6 +55,7 @@ module.exports = (path, options, render) => {
         return willReject(err);
       }
     }
+    
     if (err) {
       return handleRejection(err);
     }
@@ -64,18 +67,16 @@ module.exports = (path, options, render) => {
     let compilePartials = (values) => {
       let valTempList = localsValues.concat(values);
       try {
-        localsValues.push(...values.map((i) => {
-          compile(i, localsKeys)(...valTempList);
-        }));
+        localsValues.push(...values.map(i => compile(i, localsKeys)(...valTempList)));
       } catch (err) {
         return render(err);
       }
       send();
     }
-    
+  
     if (partialsKeys.length) {
       let applySettings = () => {
-        let ext = '.' + settings['view engine'];
+        let ext = `.${settings['view engine']}`;
         if (typeof settings.views === 'string') {
           return (i) => {
             getPartial(setPath(settings.views, partials[i], ext));
@@ -93,19 +94,22 @@ module.exports = (path, options, render) => {
               resolve(values.find(getFirst));
             }
             Promise.all(settings.views.map(getFile)).then(getContent);
-          }
+          };
           return new Promise(searchFile);
         }
       }
       
       let setPartial = settings ? applySettings() : i => getPartial(partials[i]);
+      
       localsKeys.push(...partialsKeys);
+      
       let willGetPartials = Promise.all(partialsKeys.map(setPartial))
         .then(compilePartials, handleRejection);
+        
       return willResolve ? willGetPartials : new Promise(fulfillPromise);
     }
     return send();
-  } // end assign function expression
+  } // end of assign function
   
   if (template) {
     render = render || ((err, content) => err || content);
