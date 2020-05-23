@@ -75,7 +75,7 @@ module.exports = (path, options, render) => {
     
     if (partialsKeys.length) {
       let applySettings = () => {
-        let ext = `.${settings['view engine']}`;
+        let ext = '.' + settings['view engine'];
         if (typeof settings.views === 'string') {
           return (i) => {
             getPartial(setPath(settings.views, partials[i], ext));
