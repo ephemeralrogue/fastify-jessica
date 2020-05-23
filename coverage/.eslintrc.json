@@ -1,0 +1,45 @@
+{
+    "env": {
+        "commonjs": true,
+        "es6": true,
+        "node": true,
+        "jest": true
+    },
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 11
+    },
+    "rules": {
+        "curly": "warn",
+        "dot-notation": "warn",
+        "no-lone-blocks": "warn",
+        "no-multi-spaces": "warn",
+        "array-bracket-newline": ["warn", { "multiline": true }],
+        "array-bracket-spacing": ["warn", "always", {
+          "singleValue": false,
+          "objectsInArrays": false,
+          "arraysInArrays": false
+        }],
+        "array-element-newline": ["warn", {
+          "multiline": true,
+          "minItems": 3
+        }],
+        "block-spacing": ["error", "always"],
+        "brace-style": "error",
+        "indent": ["warn", 2],
+        "key-spacing": ["warn", {
+          "beforeColon": false,
+          "afterColon": true
+        }],
+        "linebreak-style": ["warn", "unix"],
+        "object-curly-newline": ["warn", {
+          "multiline": true,
+          "minProperties": 3,
+          "consistent": true
+        }],
+        "object-curly-spacing": ["warn", "always"]
+    }
+}
