@@ -55,7 +55,7 @@ describe("jessica", () => {
       const assert = (content) => {
         expect(content).toBe("jessica - The fastest javascript template string engine!\nMIT License");
         done();
-      };
+      }
       const willRender = jessica(`${__dirname }/index.jsx`,
         { locals: { engineName: "jessica", footer: "MIT License" } }
       );
