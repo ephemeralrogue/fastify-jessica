@@ -172,7 +172,11 @@
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a>
 <a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">21x</span>
@@ -180,7 +184,10 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -197,14 +204,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -216,15 +222,16 @@
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
@@ -239,8 +246,6 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -273,8 +278,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -287,15 +295,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const fs = require('fs'); // this engine requires the fs module
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const fs = require('fs');
 &nbsp;
-/* jshint ignore:start */
-const compile = (content, $ = <span class="branch-0 cbranch-no" title="branch not covered" >'$')</span> =&gt; Function($, 'return `' + content + '`;');
-const precompile = (content, $ = '$') =&gt;
+// jshint ignore:start
+let compile = (content, $ = <span class="branch-0 cbranch-no" title="branch not covered" >'$')</span> =&gt; Function($, 'return `' + content + '`;');
+let precompile = (content, $ = '$') =&gt;
   Function($, 'try { return `' + content + '`;} catch(err) { return err }');
-/* jshint ignore:end */
+// jshint ignore:end
 &nbsp;
-let setPath = (views, ref, ext) =&gt; ref.endsWith(ext) ? <span class="branch-0 cbranch-no" title="branch not covered" >ref </span>: views  + '/' + ref + ext;
+let setPath = (views, ref, ext) =&gt; {
+  ref.endsWith(ext) ? <span class="branch-0 cbranch-no" title="branch not covered" >ref </span>: views  + '/' + ref + ext;
+}
+&nbsp;
 let getPartial = (path, cb = 'resolveNeutral') =&gt; {
   let findFile = function(resolve, reject) {
     this.resolveNeutral = (err, content) =&gt; err ? <span class="branch-0 cbranch-no" title="branch not covered" >reject(err) </span>: resolve(content);
@@ -306,22 +317,21 @@ let getPartial = (path, cb = 'resolveNeutral') =&gt; {
 };
     
 module.exports = (path, options, render) =&gt; {
-  if(options === undefined || typeof options === 'string') {
+  if (options === undefined || typeof options === 'string') {
     return precompile(path, options);
   }
-  
   let willResolve;
   let willReject;
   
   let fulfillPromise = (resolve, reject) =&gt; { 
     willResolve = resolve;
     willReject = reject;
-  }
+  };
   
   let handleRejection = (err) =&gt; {
     let output = render(err);
     return willReject ? willReject(err) : output;
-  }
+  };
   
   let {locals = <span class="branch-0 cbranch-no" title="branch not covered" >{},</span> partials = {}, settings, template} = options; 
   
@@ -342,6 +352,7 @@ module.exports = (path, options, render) =&gt; {
         return willReject(err);
       }
     }
+    
     <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >      return handleRejection(err);</span>
     }
@@ -353,18 +364,16 @@ module.exports = (path, options, render) =&gt; {
     let compilePartials = (values) =&gt; {
       let valTempList = localsValues.concat(values);
       try {
-        localsValues.push(...values.map((i) =&gt; {
-          compile(i, localsKeys)(...valTempList);
-        }));
+        localsValues.push(...values.map(i =&gt; compile(i, localsKeys)(...valTempList)));
       } catch (err) {
 <span class="cstat-no" title="statement not covered" >        return render(err);</span>
       }
       send();
     }
-    
+  
     if (partialsKeys.length) {
       let applySettings = () =&gt; {
-        let ext = '.' + settings['view engine'];
+        let ext = `.${settings['view engine']}`;
         <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof settings.views === 'string') {
           return (i) =&gt; {
             getPartial(setPath(settings.views, partials[i], ext));
@@ -382,19 +391,22 @@ module.exports = (path, options, render) =&gt; {
 <span class="cstat-no" title="statement not covered" >              resolve(values.find(getFirst));</span>
             }
 <span class="cstat-no" title="statement not covered" >            Promise.all(settings.views.map(getFile)).then(getContent);</span>
-          }
+          };
 <span class="cstat-no" title="statement not covered" >          return new Promise(searchFile);</span>
         }
       }
       
       let setPartial = settings ? applySettings() : i =&gt; getPartial(partials[i]);
+      
       localsKeys.push(...partialsKeys);
+      
       let willGetPartials = Promise.all(partialsKeys.map(setPartial))
         .then(compilePartials, handleRejection);
+        
       return willResolve ? willGetPartials : new Promise(fulfillPromise);
     }
     return send();
-  } // end assign function expression
+  } // end of assign function
   
   if (template) {
     render = render || ((err, content) =&gt; err || content);
@@ -409,7 +421,7 @@ module.exports = (path, options, render) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat May 23 2020 07:32:43 GMT+0000 (Coordinated Universal Time)
+                at Sat May 23 2020 17:21:19 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
