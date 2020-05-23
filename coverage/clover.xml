@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1590254479778" clover="3.2.0">
-  <project timestamp="1590254479778" name="All files">
+<coverage generated="1590260179872" clover="3.2.0">
+  <project timestamp="1590260179872" name="All files">
     <metrics statements="70" coveredstatements="58" conditionals="37" coveredconditionals="29" methods="24" coveredmethods="18" elements="131" coveredelements="105" complexity="0" loc="70" ncloc="70" packages="1" files="1" classes="1"/>
     <file name="jessica.js" path="/home/nonsensetwice/jessica/jessica.js">
       <metrics statements="70" coveredstatements="58" conditionals="37" coveredconditionals="29" methods="24" coveredmethods="18"/>
