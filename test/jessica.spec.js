@@ -28,8 +28,7 @@ describe("jessica", () => {
 
   describe("External templates", () => {
     test("renders a template file with a callback", (done) => {
-      jessica(
-        `${__dirname }/index.jsx`,
+      jessica(`${__dirname }/index.jsx`,
         { locals: { engineName: "jessica", footer: "MIT License" } },
         (err, content) => {
           expect(err).toBeNull();
@@ -42,8 +41,7 @@ describe("jessica", () => {
     test(
       "throws an error in case of template interpolation failure with a callback",
       (done) => {
-        jessica(
-          `${__dirname }/index.jsx`,
+        jessica(`${__dirname }/index.jsx`,
           { locals: { footer: "MIT License" } },
           (err) => {
             expect(err instanceof Error).toBe(true);
@@ -58,8 +56,7 @@ describe("jessica", () => {
         expect(content).toBe("jessica - The fastest javascript template string engine!\nMIT License");
         done();
       };
-      const willRender = jessica(
-        `${__dirname }/index.jsx`,
+      const willRender = jessica(`${__dirname }/index.jsx`,
         { locals: { engineName: "jessica", footer: "MIT License" } }
       );
       willRender.then(assert);
@@ -226,8 +223,7 @@ describe("jessica", () => {
     app.set('view engine', 'jsx');
 
     test("renders a template file", (done) => {
-      app.render(
-        "index",
+      app.render("index",
         { locals: { engineName: "jessica", footer: "MIT License" } },
         (err, content) => {
           expect(err).toBeNull();
@@ -238,8 +234,7 @@ describe("jessica", () => {
     });
 
     test("render partials", (done) => {
-      app.render(
-        "index",
+      app.render("index",
         {
           locals: { engineName: "jessica" },
           partials: {

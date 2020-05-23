@@ -1,23 +1,26 @@
-const fs = require('fs'); // this engine requires the fs module
+const fs = require('fs');
 
-// jshint ignore:start
 let compile = (content, $ = '$') => Function($, 'return `' + content + '`;');
 let precompile = (content, $ = '$') =>
   Function($, 'try { return `' + content + '`;} catch(err) { return err }');
-// jshint ignore:end
 
 let setPath = (views, ref, ext) => {
-  ref.endsWith(ext) ? ref : views  + '/' + ref + ext;
+  ref.endsWith(ext) ? ref : `${views}/${ref}${ext}`;
 }
 
 let getPartial = (path, cb = 'resolveNeutral') => {
-  let findFile = function(resolve, reject) {
-    this.resolveNeutral = (err, content) => err ? reject(err) : resolve(content);
-    this.resolvePositive = (err, content) => resolve(err || content);
+  let findFile = (resolve, reject) => {
+    this.resolveNeutral = (err, content) => {
+      if (err) reject(err);
+      resolve(content);
+    }
+    this.resolvePositive = (err, content) => {
+      resolve(err || content);
+    }
     fs.readFile(path, 'utf-8', this[cb]);
-  };
+  }
   return new Promise(findFile);
-};
+}
     
 module.exports = (path, options, render) => {
   if (options === undefined || typeof options === 'string') {
@@ -29,12 +32,16 @@ module.exports = (path, options, render) => {
   let fulfillPromise = (resolve, reject) => { 
     willResolve = resolve;
     willReject = reject;
-  };
+  }
   
   let handleRejection = (err) => {
     let output = render(err);
-    return willReject ? willReject(err) : output;
-  };
+    if (willReject) {
+      return willReject(err);
+    } else {
+      return output;
+    }
+  }
   
   let {locals = {}, partials = {}, settings, template} = options; 
   
@@ -61,13 +68,15 @@ module.exports = (path, options, render) => {
     }
     
     let localsKeys = Object.keys(locals);
-    let localsValues = localsKeys.map(i => locals[i]);
+    let localsValues = localsKeys.map((i) => { locals[i] });
     let partialsKeys = Object.keys(partials);
     
     let compilePartials = (values) => {
       let valTempList = localsValues.concat(values);
       try {
-        localsValues.push(...values.map(i => compile(i, localsKeys)(...valTempList)));
+        localsValues.push(...values.map((i) => {
+          compile(i, localsKeys)(...valTempList)));
+        }
       } catch (err) {
         return render(err);
       }
@@ -84,7 +93,7 @@ module.exports = (path, options, render) => {
         }
         return (i) => {
           let getFile = (view) => {
-            getPartial(setPath(view, partials[i], ext), 'resolvePositive');
+            getPartial(setPath(view, partials[i], ext), resolvePositive);
           }
           let getFirst = (value) => {
             typeof value === 'string';
@@ -106,7 +115,11 @@ module.exports = (path, options, render) => {
       let willGetPartials = Promise.all(partialsKeys.map(setPartial))
         .then(compilePartials, handleRejection);
         
-      return willResolve ? willGetPartials : new Promise(fulfillPromise);
+      if (willResolve) {
+        return willGetPartials;
+      } else {
+        return new Promise(fulfillPromise);
+      }
     }
     return send();
   } // end of assign function
