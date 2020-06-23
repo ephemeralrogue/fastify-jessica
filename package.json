@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Express template engine, modified from Dian Dimitrov's Express ES6 string template engine",
   "main": "jessica.js",
+  "type": "modules",
   "scripts": {
     "test": "jest"
   },

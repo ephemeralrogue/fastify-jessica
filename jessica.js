@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 // jshint ignore:start
 let compile = (content, $ = '$') => Function($, 'return `' + content + '`;');
@@ -19,7 +19,7 @@ let getPartial = (path, cb = 'resolveNeutral') => {
   return new Promise(findFile);
 };
     
-module.exports = (path, options, render) => {
+default export function jessica(path, options, render) {
   if (options === undefined || typeof options === 'string') {
     return precompile(path, options);
   }
