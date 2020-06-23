@@ -23,9 +23,6 @@
   "author": "Joshua Alexander",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^7.0.0",
-    "express": "^4.17.1",
-    "jest": "^26.0.1",
-    "prettier": "^2.0.5"
+    "jest": "^26.0.1"
   }
 }
