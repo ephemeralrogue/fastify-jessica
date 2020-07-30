@@ -1,6 +1,5 @@
-"use strict";
-const express = require("express");
-const jessica = require("../jessica");
+import express from "express";
+import jessica from "../jessica";
 
 describe("jessica", () => {
 
@@ -266,5 +265,4 @@ describe("jessica", () => {
       );
     });
   });
-
 });

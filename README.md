@@ -1,11 +1,11 @@
 Jessica: The JS ES6 Template Engine
-======
+========
 
-"Jessica," drawn from JESS as an anagram of "JS ES6," is a simple, super fast, and extendable Template Engine for Node and Express applications using pure ES6 JavaScript syntax. It works by scanning files in a working directory, then reading the contents of the files and converting them from plain strings to ES6 template literals. Template literals, enclosed by back ticks, feature String Interpolation, Embedded Expressions, Multiline strings and String Tagging for safe HTML escaping, localisation, and more. Once conversion is complete, it is then compiled to plain text by the V8 engine. Being less than 1kb, Jessica offloads a lot of the processing directly to the V8 interpreter, which compiles the code and runs as fast as the rest of the Express App. In fact, Jessica will add very little, if any, overhead to your project at all! It should also allow you to implement any functionality you'd like within the bounds of JavaScript.
+"Jessica," drawn from JESS as an anagram of "JS ES6," is a simple, super fast, and extendable Template Engine for Node and Express applications using pure ES6 JavaScript syntax, as a JavaScript module. It works by scanning files in a working directory, then reading the contents of the files and converting them from plain strings to ES6 template literals. Once conversion is complete, it is then compiled to plain text by the V8 engine. Being less than 1kb, Jessica offloads a lot of the processing directly to the V8 interpreter, which compiles the code and runs as fast as the rest of the Express App. In fact, Jessica will add very little, if any, overhead to your project at all! It should also allow you to implement any functionality you'd like within the bounds of JavaScript.
+
+Template literals, enclosed by back ticks, feature String Interpolation, Embedded Expressions, Multiline strings and String Tagging for safe HTML escaping, localisation, and more. 
 
 Minimum requirements Node.js `v4.0.0`.
-
-[![Package Version](https://img.shields.io/badge/npm-4.0.0-blue.svg)](https://www.npmjs.com/package/express-es6-template-engine)
 
 ### Benchmarks
 
@@ -16,7 +16,7 @@ Testing Jessica's performance was a great opportunity to see how it stacked up b
 ### Installation
 
 ```bash
-$ npm i express-es6-template-engine --save
+$ npm i @nonsensecodes/jessica --save
 ```
 
 ### Features
@@ -87,9 +87,10 @@ Jessica is ${maintainedBy ? `a template engine maintained by ${maintainedBy}` : 
 The basics required to integrate Jessica in your app are pretty simple and easy to implement:
 
 ```javascript
-const express = require('express'),
-  jessica = require('jessica'),
-  app = express();
+import express from 'express';
+import jessica from 'jessica';
+  
+const app = express();
   
 app.engine('html', jessica);
 app.set('views', 'views');
@@ -120,7 +121,7 @@ Express-compliant template engines such as Jessica export a function named __exp
 To get up and running without having to worry about managing extra libraries one only needs the following:
 
 ```javascript
-const jessica = require('jessica');
+import jessica from 'jessica';
 jessica(
     __dirname + '/views/index.html',
     { locals: { title:  'jessica' } },
@@ -162,7 +163,7 @@ Partial with a file name `partial.html` (see the content of the file in the prer
 <!DOCTYPE html>
 <html>
 <body>
-    <h1>JESSica</h1>
+    <h1>Jessica</h1>
     <main><p>The fastest javascript template string engine!</p></main>
 </body>
 </html>
@@ -249,7 +250,7 @@ jessica(__dirname + '/views/partial-conditional.html', {
 ```
 #### Precompiling
 
-jessica allows us bypassing Express view rendering for speed and modularity. Compiling a template is much slower than rendering it, so when it comes to speed, we should precompile our templates as part of the optimisation process. The result of precompilation can be stored to an object:
+Jessica allows us bypassing Express view rendering for speed and modularity. Compiling a template is much slower than rendering it, so when it comes to speed, we should precompile our templates as part of the optimisation process. The result of precompilation can be stored to an object:
 ```javascript
 const text = '${engineName} - The fastest javascript template string engine in the whole ${place}!';
 const precompiled = jessica(text, 'engineName, place');
@@ -269,7 +270,7 @@ This allows you to create an application that is more flexible, independent from
 
 #### Conditional statements
 
-jessica dynamically evaluates code in JavaScript. If the argument is an expression, jessica evaluates the expression. If the argument is one or more JavaScript statements, the engine executes the statements. A simplified example of using conditional statement is presented below.
+Jessica dynamically evaluates code in JavaScript. If the argument is an expression, jessica evaluates the expression. If the argument is one or more JavaScript statements, the engine executes the statements. A simplified example of using conditional statement is presented below.
 
 A route path on the server side:
 
@@ -289,7 +290,7 @@ jessica is a template engine maintained by Good Samaritans.
 
 #### Iterators
 
-Iterating over arrays and objects is quite straight forward and intuitive (knowledge of basic javascript here is essential). An object literal is passed to a html template:
+Iterating over arrays and objects is quite straight forward and intuitive (knowledge of basic javascript here is essential). An object literal is passed to an html template:
 
 ```javascript
 res.render('partial-iteration', {
@@ -321,7 +322,7 @@ The following is received by the client side:
 
 #### Error Handling
 
-jessica catches and processes errors that occur both synchronously and asynchronously. jessica comes with a default error handler so you don’t need to write your own to get started. Errors that occur in synchronous code require no extra work. If synchronous code throws an error, jessica will catch and process it. For example:
+Jessica catches and processes errors that occur both synchronously and asynchronously. Jessica comes with a default error handler so you don’t need to write your own to get started. Errors that occur in synchronous code require no extra work. If synchronous code throws an error, jessica will catch and process it. For example:
 
 ```javascript
 const text = '${engineName} - The fastest javascript template string engine in the whole ${place}!';

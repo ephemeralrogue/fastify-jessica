@@ -39,7 +39,7 @@ function handleRejection(err) {
 }
 
     
-export function jessica(path, options, render) {
+export default function jessica(path, options, render) {
   if (options === undefined || typeof options === 'string') {
     return precompile(path, options);
   }
