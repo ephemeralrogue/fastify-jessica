@@ -14,11 +14,11 @@
     "template engine",
     "javascript"
   ],
-  "homepage": "https://nonsensetwice.github.io/jessica/",
+  "homepage": "https://github.com/nonsensecodes/jessica",
   "engine": "node >= 4.0.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nonsensetwice/jessica.git"
+    "url": "https://github.com/nonsensecodes/jessica"
   },
   "author": "Dian Dimitrov",
   "license": "MIT",
