@@ -1,23 +1,22 @@
-Express ES6 string template engine
-======
+Jessica: The JS ES6 Template Engine
+========
 
-ES6 Renderer is simple, super fast, and extendable Template Engine for Node and Express applications which uses pure ES6 Javascript syntax.
-It works by scanning files in a working directory, then reading the contents of the files and converting them from plain strings to ES6 template strings. ES6 template strings are string literals enclosed by the back-tick. They feature String Interpolation, Embedded Expressions, Multiline strings and String Tagging for safe HTML escaping, localisation, etc. Once convertion is completed its then compiled to plain text by the V8 engine, harnessing 100% of its power. Being less than 1kb, ES6 Renderer offloads a lot of the processing directly to the V8 interpreter, which compiles the code and runs as fast as the rest of the Express App. In fact, ES6 Renderer shouldn't add any overhead to the project at all! It should also allow us to implement any functionality we like within the bounds of Javascript.
+"Jessica," drawn from JESS as an anagram of "JS ES6," is a simple, super fast, and extendable Template Engine for Node and Express applications using pure ES6 JavaScript syntax, as a JavaScript module. It works by scanning files in a working directory, then reading the contents of the files and converting them from plain strings to ES6 template literals. Once conversion is complete, it is then compiled to plain text by the V8 engine. Being less than 1kb, Jessica offloads a lot of the processing directly to the V8 interpreter, which compiles the code and runs as fast as the rest of the Express App. In fact, Jessica will add very little, if any, overhead to your project at all! It should also allow you to implement any functionality you'd like within the bounds of JavaScript.
+
+Template literals, enclosed by back ticks, feature String Interpolation, Embedded Expressions, Multiline strings and String Tagging for safe HTML escaping, localisation, and more. 
 
 Minimum requirements Node.js `v4.0.0`.
 
-[![Package Version](https://img.shields.io/badge/npm-4.0.0-blue.svg)](https://www.npmjs.com/package/express-es6-template-engine)
-
 ### Benchmarks
 
-Testing ES6 Renderer performance was a great opportunity to see how it stacked-up beside others. Our speed test compiled one main template containing an array of string, an object literal and conditional statements.
+Testing Jessica's performance was a great opportunity to see how it stacked up beside others. Our speed test compiled one main template containing an array of strings, an object literal, and conditional statements.
 
 ![Benchmarks](benchmark.png)
 
 ### Installation
 
 ```bash
-$ npm i express-es6-template-engine --save
+$ npm i @nonsensecodes/jessica --save
 ```
 
 ### Features
@@ -69,7 +68,7 @@ List of used html files in the `views` folder:
 `partial-conditional.html`
 
 ```html
-ES6 Renderer is ${maintainedBy ? `a template engine maintained by ${maintainedBy}` : 'not maintained anymore'}.
+Jessica is ${maintainedBy ? `a template engine maintained by ${maintainedBy}` : 'not maintained anymore'}.
 ```
 
 `partial-iteration.html`
@@ -85,14 +84,15 @@ ES6 Renderer is ${maintainedBy ? `a template engine maintained by ${maintainedBy
 
 #### Setup with Express
 
-The basics required to integrate ES6 renderer in your app are pretty simple and easy to implement:
+The basics required to integrate Jessica in your app are pretty simple and easy to implement:
 
 ```javascript
-const express = require('express'),
-  es6Renderer = require('express-es6-template-engine'),
-  app = express();
+import express from 'express';
+import jessica from 'jessica';
   
-app.engine('html', es6Renderer);
+const app = express();
+  
+app.engine('html', jessica);
 app.set('views', 'views');
 app.set('view engine', 'html');
 
@@ -111,20 +111,20 @@ Before Express can render template files, the following application settings mus
 HTML template file named `index.html` in the views directory is needed (the content of the file can be found in the prerequisites section). Route to render the html file is expected. If the view engine property is not set, we must specify the extension of the view file. Otherwise, it can be safely omitted.
 
 ```javascript
-app.render('index', {locals: {title: 'ES6 Renderer'}});
+app.render('index', {locals: {title: 'jessica'}});
 ```
 
-Express-compliant template engines such as ES6 Renderer export a function named __express(filePath, options, callback), which is called by the res.render() function to render the template code. When a request is made to the home page, the index.html file will be rendered as HTML.
+Express-compliant template engines such as Jessica export a function named __express(filePath, options, callback), which is called by the res.render() function to render the template code. When a request is made to the home page, the index.html file will be rendered as HTML.
 
 #### Setup without Express
 
 To get up and running without having to worry about managing extra libraries one only needs the following:
 
 ```javascript
-const es6Renderer = require('express-es6-template-engine');
-es6Renderer(
+import jessica from 'jessica';
+jessica(
     __dirname + '/views/index.html',
-    { locals: { title:  'ES6 Renderer' } },
+    { locals: { title:  'jessica' } },
     (err, content) => err || content
 );
 ```
@@ -135,7 +135,7 @@ The content below will be rendered on the client side as a response from both se
 <!DOCTYPE html>
 <html>
 <body>
-    <h1>ES6 Renderer</h1>
+    <h1>JESSica</h1>
 </body>
 </html>
 ```
@@ -148,7 +148,7 @@ Within your app route callback, call `res.render`, passing any partials and loca
 app.get('/', function(req, res) {
   res.render('template', {
       locals: {
-        title:  'ES6 Renderer'
+        title:  'jessica'
       },
       partials: {
         partial: __dirname + '/views/partial'
@@ -163,7 +163,7 @@ Partial with a file name `partial.html` (see the content of the file in the prer
 <!DOCTYPE html>
 <html>
 <body>
-    <h1>ES6 Renderer</h1>
+    <h1>Jessica</h1>
     <main><p>The fastest javascript template string engine!</p></main>
 </body>
 </html>
@@ -173,7 +173,7 @@ All templates files paths are defined as absolute to the root directory of the p
 
 #### Compiling a string
 
-ES6 Renderer rendering functionality has separate scanning, parsing, string generation and response sending phases. Compilation is pretty much the same but without the response sending phase. This feature can be useful for pre-processing templates on the server.
+Jessica's rendering functionality has separate scanning, parsing, string generation and response sending phases. Compilation is pretty much the same but without the response sending phase. This feature can be useful for pre-processing templates on the server.
 Compiling has the following syntax:
 
 ```javascript
@@ -182,27 +182,27 @@ const cb = (err, content) => err || content;
 
 // sync - second parameter is a string representation of an array of variable names.
 // The returned function is called with a string representation of an array of variable values.
-const compiled = es6Renderer(titleTpl, 'engineName')('ES6 Renderer');
+const compiled = jessica(titleTpl, 'engineName')('jessica');
 // async - second parameter is an object and third parameter is a callback function
-es6Renderer(titleTpl,{ template: true, locals:{ engineName: 'ES6 Renderer' } }, cb);
+jessica(titleTpl,{ template: true, locals:{ engineName: 'jessica' } }, cb);
 ```
 Both methods will result in the following output:
 
 ```
-ES6 Renderer - The fastest javascript template string engine!
+jessica - The fastest javascript template string engine!
 ```
 The template engine allows both synchronous and asynchronous method invocations. If string is rendered as in the examples provided above a 'template' option needs to be set to true. The preceding synchronous invocation returns an output immediately in response to the function execution. Alternatively, you can specify partials and omit template parameter to force file lookup and content reading and invoke the function asynchronously. 
 
 
 #### Compiling a template
 
-The two functions `app.render` and `es6Renderer` are almost identical, but they require slightly different parameters to be passed. While `app.render` uses an absolute path, or a path relative to the views setting, `es6Renderer` expects a path relative to root folder.
+The two functions `app.render` and `jessica` are almost identical, but they require slightly different parameters to be passed. While `app.render` uses an absolute path, or a path relative to the views setting, `jessica` expects a path relative to root folder.
 They both return the rendered content of a view via the callback function. The callback function which is provided as a third parameter is called once the asynchronous activity is completed. The output in the two examples provided below is the same:
 
 ```javascript
 app.render('template', {
   locals: {
-    title:  'ES6 Renderer'
+    title:  'jessica'
   },
   partials: {
     template: __dirname + '/views/partial'
@@ -210,20 +210,20 @@ app.render('template', {
 }, (err, content) => err || content);
 ```
 ```javascript
-es6Renderer(__dirname + '/views/template.html', {
+jessica(__dirname + '/views/template.html', {
   locals: {
-    title:  'ES6 Renderer'
+    title:  'jessica'
   },
   partials: {
     template: __dirname + '/views/partial.html'
   }
 }, (err, content) => err || content);
 ```
-On average `es6Renderer` yields slightly better performance than `app.render`. Async function invocation of `es6Renderer` also returns a promise, which enables us to chain method calls:
+On average `jessica` yields slightly better performance than `app.render`. Async function invocation of `jessica` also returns a promise, which enables us to chain method calls:
 ```javascript
-const compile = es6Renderer(__dirname + '/views/template.html', {
+const compile = jessica(__dirname + '/views/template.html', {
   locals: {
-    title:  'ES6 Renderer'
+    title:  'jessica'
   },
   partials: {
     template: __dirname + '/views/partial.html'
@@ -242,7 +242,7 @@ const renderPage = (err, content) => res.render('template', {
     partial: content
   }
 });
-es6Renderer(__dirname + '/views/partial-conditional.html', {
+jessica(__dirname + '/views/partial-conditional.html', {
   locals: {
     maintainedBy:  'Good Samaritans'
   }
@@ -250,27 +250,27 @@ es6Renderer(__dirname + '/views/partial-conditional.html', {
 ```
 #### Precompiling
 
-ES6 Renderer allows us bypassing Express view rendering for speed and modularity. Compiling a template is much slower than rendering it, so when it comes to speed, we should precompile our templates as part of the optimisation process. The result of precompilation can be stored to an object:
+Jessica allows us bypassing Express view rendering for speed and modularity. Compiling a template is much slower than rendering it, so when it comes to speed, we should precompile our templates as part of the optimisation process. The result of precompilation can be stored to an object:
 ```javascript
 const text = '${engineName} - The fastest javascript template string engine in the whole ${place}!';
-const precompiled = es6Renderer(text, 'engineName, place');
+const precompiled = jessica(text, 'engineName, place');
 ```
 and then invoked whenever needed:
 ```javascript
-console.log(precompiled('ES6 Renderer', 'multiverse'));
+console.log(precompiled('jessica', 'multiverse'));
 ```
 To make use of this precompilation, templates should be compiled with names that the compiler would expect and the result function called with an argument list that consists of values relative to the names. If no property name is defined a default one is created with a value of '$': 
 ```javascript
 const text = '${$.engineName} - The fastest javascript template string engine in the whole ${$.place}!';
-console.log(es6Renderer(text)({ engineName: 'ES6 Renderer', place: 'multiverse' });
+console.log(jessica(text)({ engineName: 'jessica', place: 'multiverse' });
 ```
-This allows us to create an application that is more flexible, independent from a framework, easier to understand and better performing.
+This allows you to create an application that is more flexible, independent from a framework, easier to understand and better performing.
 
 
 
 #### Conditional statements
 
-ES6 Renderer dynamically evaluates code in JavaScript. If the argument is an expression, ES6 Renderer evaluates the expression. If the argument is one or more JavaScript statements, the engine executes the statements. A simplified example of using conditional statement is presented below.
+Jessica dynamically evaluates code in JavaScript. If the argument is an expression, jessica evaluates the expression. If the argument is one or more JavaScript statements, the engine executes the statements. A simplified example of using conditional statement is presented below.
 
 A route path on the server side:
 
@@ -285,12 +285,12 @@ res.render('partial-conditional', {
 Will result in the following:
 
 ```html
-ES6 Renderer is a template engine maintained by Good Samaritans.
+jessica is a template engine maintained by Good Samaritans.
 ```
 
 #### Iterators
 
-Iterating over arrays and objects is quite straight forward and intuitive (knowledge of basic javascript here is essential). An object literal is passed to a html template:
+Iterating over arrays and objects is quite straight forward and intuitive (knowledge of basic javascript here is essential). An object literal is passed to an html template:
 
 ```javascript
 res.render('partial-iteration', {
@@ -322,21 +322,20 @@ The following is received by the client side:
 
 #### Error Handling
 
-ES6 Renderer catches and processes errors that occur both synchronously and asynchronously. ES6 Renderer comes with a default error handler so you don’t need to write your own to get started.
-Errors that occur in synchronous code require no extra work. If synchronous code throws an error, then ES6 Renderer will catch and process it. For example.
+Jessica catches and processes errors that occur both synchronously and asynchronously. Jessica comes with a default error handler so you don’t need to write your own to get started. Errors that occur in synchronous code require no extra work. If synchronous code throws an error, jessica will catch and process it. For example:
 
 ```javascript
 const text = '${engineName} - The fastest javascript template string engine in the whole ${place}!';
-const err = es6Renderer(text, 'engineName')('ES6 Renderer', 'multiverse');
+const err = jessica(text, 'engineName')('jessica', 'multiverse');
 expect(err instanceof Error).to.equal(true);
 ```
 
-For errors returned from asynchronous functions, you must pass them to the callback function, where ES6 Renderer will catch and process them. A viable alternative will be to use native promise catch or reject methods. The example underneath handles both cases simultaneously:
+For errors returned from asynchronous functions, you must pass them to the callback function, where jessica will catch and process them. A viable alternative will be to use the native promise catch or reject methods. The following example handles both cases simultaneously:
 
 ```javascript
-es6Renderer(
+jessica(
     __dirname + "/index.html",
-    { locals: { engineName: "ES6 Renderer", footer: "MIT License" } },
+    { locals: { engineName: "jessica", footer: "MIT License" } },
     (err) => expect(err instanceof Error).to.equal(true);
 ).then((err) => expect(err instanceof Error).to.equal(true));
 ```
@@ -346,6 +345,7 @@ es6Renderer(
 MIT License
 
 Copyright (c) 2015 Dian Dimitrov
+Copyright (c) 2020 Joshua Alexander
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

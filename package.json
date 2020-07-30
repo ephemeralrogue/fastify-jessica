@@ -1,30 +1,42 @@
 {
+<<<<<<< HEAD
   "name": "express-es6-template-engine",
   "version": "2.2.3",
   "description": "Express ES6 string template engine",
   "main": "es6-renderer.js",
+=======
+  "name": "jessica",
+  "version": "0.02.0",
+  "description": "Express template engine, modified from Dian Dimitrov's Express ES6 string template engine",
+  "main": "jessica.js",
+  "type": "module",
+>>>>>>> dev
   "scripts": {
-    "test": "mocha"
+    "test": "jest"
   },
   "keywords": [
     "ES6",
+    "ESM",
     "express",
     "template engine",
-    "javascript",
-    "backlash template strings"
+    "javascript"
   ],
-  "homepage": "https://dondido.github.io/express-es6-template-engine/",
+  "homepage": "https://github.com/nonsensecodes/jessica",
   "engine": "node >= 4.0.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dondido/express-es6-template-engine.git"
+    "url": "https://github.com/nonsensecodes/jessica"
   },
   "author": "Dian Dimitrov",
   "license": "MIT",
   "devDependencies": {
+<<<<<<< HEAD
     "minimist": ">=0.2.1",
     "chai": "^4.2.0",
     "express": "^4.17.1",
     "mocha": "^5.2.0"
+=======
+    "jest": "^26.0.1"
+>>>>>>> dev
   }
 }
