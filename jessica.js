@@ -1,45 +1,53 @@
 import fs from 'fs';
 
-// jshint ignore:start
-let compile = (content, $ = '$') => Function($, 'return `' + content + '`;');
-let precompile = (content, $ = '$') =>
-  Function($, 'try { return `' + content + '`;} catch(err) { return err }');
-// jshint ignore:end
+const willResolve;
+const willReject;
 
-let setPath = (views, ref, ext) => {
+function compile(content, $ = '$') {
+  Function($, 'return `' + content + '`;');
+}
+
+function precompile(content, $ = '$') {
+  Function($, 'try { return `' + content + '`;} catch(err) { return err }');
+}
+
+function setPath(views, ref, ext) {
   ref.endsWith(ext) ? ref : views  + '/' + ref + ext;
 }
 
-let getPartial = (path, cb = 'resolveNeutral') => {
-  let findFile = function(resolve, reject) {
-    this.resolveNeutral = (err, content) => err ? reject(err) : resolve(content);
-    this.resolvePositive = (err, content) => resolve(err || content);
+function getPartial(path, cb = 'resolveNeutral') {
+  function findFile(resolve, reject) {
+    this.resolveNeutral = function(err, content) {
+      err ? reject(err) : resolve(content);
+    }
+    this.resolvePositive = function(err, content) {
+      resolve(err || content);
+    }
     fs.readFile(path, 'utf-8', this[cb]);
-  };
+  }
   return new Promise(findFile);
-};
+}
+
+function fulfillPromise(resolve, reject) { 
+  willResolve = resolve;
+  willReject = reject;
+}
+
+function handleRejection(err) {
+  let output = render(err);
+  return willReject ? willReject(err) : output;
+}
+
     
-default export function jessica(path, options, render) {
+export function jessica(path, options, render) {
   if (options === undefined || typeof options === 'string') {
     return precompile(path, options);
   }
-  let willResolve;
-  let willReject;
-  
-  let fulfillPromise = (resolve, reject) => { 
-    willResolve = resolve;
-    willReject = reject;
-  };
-  
-  let handleRejection = (err) => {
-    let output = render(err);
-    return willReject ? willReject(err) : output;
-  };
   
   let {locals = {}, partials = {}, settings, template} = options; 
   
-  let assign = (err, content) => {
-    let send = () => {
+  function assign(err, content) {
+    function send() {
       if (render) {
         try {
           let compiled = compile(content, localsKeys)(...localsValues);
@@ -54,7 +62,7 @@ default export function jessica(path, options, render) {
       } catch (err) {
         return willReject(err);
       }
-    }
+    } // end send() declaration
     
     if (err) {
       return handleRejection(err);
@@ -64,7 +72,7 @@ default export function jessica(path, options, render) {
     let localsValues = localsKeys.map(i => locals[i]);
     let partialsKeys = Object.keys(partials);
     
-    let compilePartials = (values) => {
+    function compilePartials(values) {
       let valTempList = localsValues.concat(values);
       try {
         localsValues.push(...values.map(i => compile(i, localsKeys)(...valTempList)));
@@ -75,29 +83,29 @@ default export function jessica(path, options, render) {
     }
   
     if (partialsKeys.length) {
-      let applySettings = () => {
+      function applySettings() {
         let ext = `.${settings['view engine']}`;
         if (typeof settings.views === 'string') {
-          return (i) => {
+          return function(i) {
             getPartial(setPath(settings.views, partials[i], ext));
           }
         }
-        return (i) => {
-          let getFile = (view) => {
-            getPartial(setPath(view, partials[i], ext), 'resolvePositive');
+        return function(i) {
+          function getFile(view) {
+            getPartial(setPath(view, partials[i], ext), resolvePositive);
           }
-          let getFirst = (value) => {
+          function getFirst(value) {
             typeof value === 'string';
           }
-          let searchFile = (resolve, reject) => {
-            let getContent = (values) => {
+          function searchFile(resolve, reject) {
+            function getContent(values) {
               resolve(values.find(getFirst));
             }
             Promise.all(settings.views.map(getFile)).then(getContent);
-          };
+          }
           return new Promise(searchFile);
         }
-      }
+      } // end applySettings() declaration
       
       let setPartial = settings ? applySettings() : i => getPartial(partials[i]);
       
