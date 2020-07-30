@@ -1,6 +1,6 @@
 {
   "name": "@nonsensecodes/jessica",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The JS ES6 Template Engine with ES6 Modules support",
   "main": "jessica.js",
   "type": "module",

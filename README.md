@@ -5,13 +5,7 @@ Jessica: The JS ES6 Template Engine
 
 Template literals, enclosed by back ticks, feature String Interpolation, Embedded Expressions, Multiline strings and String Tagging for safe HTML escaping, localisation, and more. 
 
-Minimum requirements Node.js `v4.0.0`.
-
-### Benchmarks
-
-Testing Jessica's performance was a great opportunity to see how it stacked up beside others. Our speed test compiled one main template containing an array of strings, an object literal, and conditional statements.
-
-![Benchmarks](benchmark.png)
+Minimum requirements Node.js `v13.0.0`, for native ES6 modules support.
 
 ### Installation
 
