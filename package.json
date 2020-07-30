@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "The JS ES6 Template Engine with ES6 Modules support",
   "main": "jessica.js",
+  "type": "module",
   "directories": {
     "test": "test"
   },
