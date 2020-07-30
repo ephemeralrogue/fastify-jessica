@@ -1,7 +1,7 @@
 import fs from 'fs';
 
-const willResolve;
-const willReject;
+let willResolve;
+let willReject;
 
 function compile(content, $ = '$') {
   Function($, 'return `' + content + '`;');
