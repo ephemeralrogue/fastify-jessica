@@ -32,19 +32,18 @@ function fulfillPromise(resolve, reject) {
   willResolve = resolve;
   willReject = reject;
 }
-
-function handleRejection(err) {
-  let output = render(err);
-  return willReject ? willReject(err) : output;
-}
-
     
 export default function jessica(path, options, render) {
   if (options === undefined || typeof options === 'string') {
     return precompile(path, options);
   }
   
-  let {locals = {}, partials = {}, settings, template} = options; 
+  let {locals = {}, partials = {}, settings, template} = options;
+  
+  function handleRejection(err) {
+    let output = render(err);
+    return willReject ? willReject(err) : output;
+  }
   
   function assign(err, content) {
     function send() {
